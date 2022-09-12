@@ -64,3 +64,15 @@ fun drawCreeper(tile: Tile) {
     }
 }
 
+/*
+WARNING This class shouldn't be used in Kotlin. Use kotlin.Int instead. (flood_water.kts:20:35)
+ERROR Expression 'entrySet' of type '(Mutable)Set<(Mutable)Map.(Mutable)Entry<Int!, Block!>!>!' cannot be invoked as a function. The function 'invoke()' is not found (flood_water.kts:49:31)
+ERROR Cannot access 'entrySet': it is package-private in 'HashMap' (flood_water.kts:49:31)
+WARNING Variable 'newFlags' is never used (flood_water.kts:50:13)
+ERROR Unresolved reference: creep (flood_water.kts:57:18)
+ERROR Type mismatch: inferred type is Integer but Int was expected (flood_water.kts:60:31)
+ERROR The integer literal does not conform to the expected type Integer (flood_water.kts:60:72)
+ERROR Unresolved reference: creep (flood_water.kts:61:141)
+ERROR Unresolved reference: creep (flood_water.kts:61:175)
+ERROR Unresolved reference: creep (flood_water.kts:62:60)
+*/
