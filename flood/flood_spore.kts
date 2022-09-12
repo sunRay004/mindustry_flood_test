@@ -1,3 +1,10 @@
+// 已禁用，原因：
+/*
+ERROR Unresolved reference: creeperableTiles (flood_spore.kts:53:13)
+ERROR Unresolved reference: depositCreeper (flood_spore.kts:64:5)
+*/
+
+
 @file:Depends("flood/flood_settings", "调用配置")
 
 package flood
@@ -23,6 +30,10 @@ import java.util.*
 var sporeTargetOffset = depends("flood/flood_settings")?.import<(Int)>("SporeTargetOffset")
 var sporeRadius = depends("flood/flood_settings")?.import<(Float?)>("SporeTargetOffset")?.toFloat()
 var sporeAmount = depends("flood/flood_settings")?.import<(Int)>("SporeTargetOffset")
+
+fun invalidTile(tile: Tile?): Boolean {
+    return tile == null
+}
 
 fun targetSpore(): FloatArray {
     var ret: FloatArray? = null
