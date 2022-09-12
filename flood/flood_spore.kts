@@ -20,7 +20,9 @@ import mindustry.world.blocks.environment.*
 import mindustry.world.meta.*
 import java.util.*
 
-import flood.flood_settings
+var sporeTargetOffset = depends("flood/flood_settings")?.import<(Int)>("SporeTargetOffset")
+var sporeRadius = depends("flood/flood_settings")?.import<(Float?)>("SporeTargetOffset")?.toFloat()
+var sporeAmount = depends("flood/flood_settings")?.import<(Int)>("SporeTargetOffset")
 
 fun targetSpore(): FloatArray {
     var ret: FloatArray? = null
@@ -29,12 +31,12 @@ fun targetSpore(): FloatArray {
         iterations++
         val player: Player = Groups.player.index(Mathf.random(0, Groups.player.size() - 1))
         if (player.unit() == null || player.x.toInt() == 0 && player.y.toInt() == 0) continue
-        val unit: mindustry.gen.Unit! = player.unit()
+        val unit: mindustry.gen.Unit = player.unit()
         ret = floatArrayOf(
-            unit.x + Mathf.random(-sporeTargetOffset, sporeTargetOffset),
-            unit.y + Mathf.random(-sporeTargetOffset, sporeTargetOffset)
+            unit.x + Mathf.random(-sporeTargetOffset!!, sporeTargetOffset!!),
+            unit.y + Mathf.random(-sporeTargetOffset!!, sporeTargetOffset!!)
         )
-        val retTile: mindustry.world.Tile! = world.tileWorld(ret[0], ret[1])
+        val retTile: mindustry.world.Tile = world.tileWorld(ret[0], ret[1])
 
         // target creeperableTiles only
         if (creeperableTiles.contains(retTile)) {
@@ -45,8 +47,8 @@ fun targetSpore(): FloatArray {
 }
 
 fun sporeCollision(x: Float, y: Float) {
-    val tile: mindustry.world.Tile! = world.tileWorld(x, y)
+    val tile: mindustry.world.Tile = world.tileWorld(x, y)
     if (invalidTile(tile)) return
-    Call.effect(Fx.sapExplosion, x, y, sporeRadius, Color.blue)
-    depositCreeper(tile, sporeRadius, sporeAmount)
+    Call.effect(Fx.sapExplosion, x, y, sporeRadius!!.toFloat(), Color.blue)
+    depositCreeper(tile, sporeRadius!!, sporeAmount!!.toFloat())
 }
